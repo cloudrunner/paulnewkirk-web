@@ -1,0 +1,2351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paul Newkirk — Slate & Amber</title>
+  <meta name="description" content="Kim Williams — Atlanta pianist performing jazz, pop, rock, and classical for three decades. Available for events, private engagements, and club dates.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+
+    /* ═══════════════════════════════════════
+       BASE
+    ═══════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #f0eee8;
+      color: #1e2535;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ═══════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      background: rgba(0,0,0,0);
+      transition: background 0.4s;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #nav.solid { background: #1e2535; }
+
+    .nav-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #d4883a;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.2s;
+    }
+
+    .nav-menu a:hover { color: #fff; }
+
+    .nav-menu .book-link > a {
+      background: #d4883a;
+      color: #fff;
+      padding: 0.4rem 1.1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-menu .book-link > a:hover {
+      background: #e09848;
+      color: #fff;
+    }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: #fff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* scheme badge */
+    .scheme-badge {
+      font-size: 0.48rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(212,136,58,0.6);
+      border: 1px solid rgba(212,136,58,0.25);
+      padding: 0.2rem 0.5rem;
+      margin-left: 0.75rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════
+       HERO SLIDESHOW
+    ═══════════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      background: #1e2535;
+    }
+
+    .slides {
+      position: absolute;
+      inset: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+    }
+
+    .slide.active { opacity: 1; }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: brightness(0.52) grayscale(18%);
+    }
+
+    /* placeholder slides when no extra images exist */
+    .slide-placeholder {
+      width: 100%;
+      height: 100%;
+      background: #1e2535;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-placeholder span {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.1) 0%,
+        rgba(0,0,0,0.05) 30%,
+        rgba(0,0,0,0.65) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      padding: 0 1.5rem 5rem;
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 8vw, 7rem);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2.8rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.75rem 2rem;
+      border: 1px solid #fff;
+      color: #fff;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .cta-btn:hover {
+      background: #fff;
+      color: #1e2535;
+    }
+
+    .cta-btn.primary {
+      background: #d4883a;
+      color: #fff;
+      border-color: #d4883a;
+    }
+
+    .cta-btn.primary:hover {
+      background: #e09848;
+    }
+
+    /* slide dots */
+    .slide-dots {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s;
+    }
+
+    .dot.active { background: #fff; }
+
+    /* scroll arrow */
+    .hero-scroll {
+      position: absolute;
+      bottom: 1.8rem;
+      right: 2.5rem;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .hero-scroll span {
+      font-size: 0.52rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      writing-mode: vertical-rl;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%,100% { opacity:1; transform:scaleY(1); }
+      50%      { opacity:0.4; transform:scaleY(0.7); }
+    }
+
+    /* ═══════════════════════════════════════
+       QUOTE BAND
+    ═══════════════════════════════════════ */
+    .quote-band {
+      background: #1e2535;
+      padding: 2.4rem 2rem;
+      text-align: center;
+    }
+
+    .quote-band blockquote {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.5vw, 1.45rem);
+      color: rgba(255,255,255,0.95);
+      letter-spacing: 0.02em;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .quote-band cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION SHARED
+    ═══════════════════════════════════════ */
+    .section {
+      padding: 6rem 2rem;
+    }
+
+    .section-dark {
+      background: #1e2535;
+      color: #fff;
+    }
+
+    .section-gray {
+      background: #e6e2da;
+    }
+
+    .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .section-dark .section-label { color: #d4883a; font-size: 0.68rem; }
+
+    .section-heading {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+    }
+
+    .rule {
+      width: 40px; height: 2px;
+      background: #d4883a;
+      margin: 1.5rem 0;
+    }
+
+    .section-dark .rule { background: rgba(255,255,255,0.3); }
+
+    /* ═══════════════════════════════════════
+       BIO
+    ═══════════════════════════════════════ */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .bio-text p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #222;
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+
+    .bio-text p strong { font-weight: 600; color: #1e2535; }
+
+    .bio-pull {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      line-height: 1.45;
+      color: #1e2535;
+      border-left: 3px solid #d4883a;
+      padding-left: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid #e0e0e0;
+      border-left: 1px solid #e0e0e0;
+      margin-top: 3rem;
+    }
+
+    .stat-cell {
+      padding: 1.6rem 1.2rem;
+      border-right: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+      text-align: center;
+    }
+
+    .stat-cell .n {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+      color: #1e2535;
+    }
+
+    .stat-cell .l {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .bio-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .bio-photo {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: #ccc;
+    }
+
+    .bio-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+      transition: transform 0.5s ease, filter 0.4s ease;
+    }
+
+    .bio-photo:hover img {
+      transform: scale(1.05);
+      filter: grayscale(0%) contrast(1.02);
+    }
+
+    .bio-photo.tall {
+      aspect-ratio: 2/3;
+      grid-column: span 2;
+    }
+
+    .bio-photo.placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #d8d4cc;
+    }
+
+    .bio-photo.placeholder span {
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ═══════════════════════════════════════
+       WHAT I DO
+    ═══════════════════════════════════════ */
+    .what-ido-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .what-ido-card {
+      background: #faf8f5;
+      padding: 3rem 2.5rem;
+      border-top: 3px solid #d4883a;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .what-ido-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .what-ido-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1e2535;
+      margin-bottom: 1.25rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .what-ido-card p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: #333;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .what-ido-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .what-ido-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.88rem;
+      color: #444;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .what-ido-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #d4883a;
+      font-weight: 700;
+    }
+
+    /* ═══════════════════════════════════════
+       VENUES / PERFORMANCES
+    ═══════════════════════════════════════ */
+    .venues-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .venues-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .vc-head {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #1e2535;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 1.2rem;
+    }
+
+    .vc-list {
+      list-style: none;
+    }
+
+    .vc-list li {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #222;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .vc-list li::before {
+      content: '—';
+      color: #bbb;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    .vc-list li em {
+      font-style: normal;
+      font-size: 0.72rem;
+      color: #999;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .venues-note {
+      margin-top: 2.5rem;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #888;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════
+       PERFORMANCES / UPCOMING
+    ═══════════════════════════════════════ */
+    .perf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+
+    .perf-table tbody tr {
+      border-bottom: 1px solid #e8e8e8;
+      transition: background 0.15s;
+    }
+
+    .perf-table tbody tr:first-child { border-top: 1px solid #e8e8e8; }
+
+    .perf-table tbody tr:hover { background: #fafafa; }
+
+    .perf-table td {
+      padding: 1.3rem 0.5rem;
+      vertical-align: middle;
+    }
+
+    .td-date {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #1e2535;
+      width: 90px;
+      white-space: nowrap;
+    }
+
+    .td-venue {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1e2535;
+    }
+
+    .td-loc {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: #888;
+      margin-top: 0.15rem;
+    }
+
+    .td-tag {
+      width: 130px;
+      text-align: right;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid #ccc;
+      color: #555;
+      padding: 0.3rem 0.7rem;
+      white-space: nowrap;
+    }
+
+    .tag.featured {
+      border-color: #d4883a;
+      color: #1e2535;
+    }
+
+    /* ═══════════════════════════════════════
+       PHOTO STRIP
+    ═══════════════════════════════════════ */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      height: 380px;
+      overflow: hidden;
+    }
+
+    .ps-item {
+      overflow: hidden;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ps-item img {
+      width: 101%;
+      margin-left: -0.5%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(30%) brightness(0.85);
+      transition: filter 0.4s, transform 0.5s;
+    }
+
+    .ps-item:hover img {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.04);
+    }
+
+    .ps-item.placeholder {
+      background: #242e42;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ps-item.placeholder span {
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.12);
+    }
+
+    /* ═══════════════════════════════════════
+       LISTEN / VIDEO
+    ═══════════════════════════════════════ */
+    .listen-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .listen-card {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      background: #242e42;
+      aspect-ratio: 16/10;
+    }
+
+    .listen-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: brightness(0.55) grayscale(20%);
+      transition: filter 0.4s, transform 0.5s;
+    }
+
+    .listen-card:hover img {
+      filter: brightness(0.7) grayscale(0%);
+      transform: scale(1.04);
+    }
+
+    .listen-card.video-card {
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .listen-card.video-card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .listen-card.video-card .listen-caption {
+      pointer-events: none;
+    }
+
+    .listen-card.placeholder-card {
+      background: #2a3448;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .listen-card.placeholder-card span {
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .play-circle {
+      width: 52px; height: 52px;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .listen-card:hover .play-circle {
+      background: #fff;
+      border-color: #fff;
+    }
+
+    .play-circle svg {
+      width: 16px; height: 16px;
+      fill: #fff;
+      margin-left: 3px;
+      transition: fill 0.2s;
+    }
+
+    .listen-card:hover .play-circle svg { fill: #1e2535; }
+
+    .listen-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 1rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+      z-index: 2;
+    }
+
+    .lc-label {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.2rem;
+    }
+
+    .lc-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+
+    .listen-more {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    .listen-more a {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.35);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .listen-more a:hover { border-color: #fff; }
+
+    /* ═══════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════ */
+    .faq-list { margin-top: 2.5rem; }
+
+    .faq-item { border-top: 1px solid #e4e4e4; }
+    .faq-item:last-child { border-bottom: 1px solid #e4e4e4; }
+
+    .faq-btn {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 1.4rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .faq-q {
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #1e2535;
+    }
+
+    .faq-icon {
+      width: 22px; height: 22px;
+      border: 1.5px solid #bbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+      line-height: 1;
+      color: #555;
+      font-family: monospace;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .faq-item.open .faq-icon {
+      background: #d4883a;
+      border-color: #d4883a;
+      color: #fff;
+    }
+
+    .faq-ans {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-item.open .faq-ans { max-height: 300px; }
+
+    .faq-ans p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: #333;
+      line-height: 1.85;
+      padding-bottom: 1.5rem;
+    }
+
+    /* ═══════════════════════════════════════
+       BOOKING / CONTACT
+    ═══════════════════════════════════════ */
+    .booking-split {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .booking-info p.intro {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 2.5rem;
+    }
+
+    .cr {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      align-items: flex-start;
+    }
+
+    .cr-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #d4883a;
+      min-width: 90px;
+      padding-top: 0.1rem;
+    }
+
+    .cr-value {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.90);
+    }
+
+    .cr-value a {
+      color: rgba(255,255,255,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .cr-value a:hover { color: #fff; border-color: #fff; }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-block;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.65);
+      padding: 0.5rem 1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-btn:hover { border-color: #d4883a; color: #d4883a; }
+
+    /* Form */
+    .booking-form {
+      background: #f0eee8;
+      padding: 3rem;
+    }
+
+    .bf-title {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #1e2535;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .fg { margin-bottom: 1.4rem; }
+
+    .fg label {
+      display: block;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+
+    .fg input,
+    .fg select,
+    .fg textarea {
+      width: 100%;
+      background: #e6e2da;
+      border: 1px solid #e4e4e4;
+      color: #1e2535;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      padding: 0.8rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+
+    .fg input:focus,
+    .fg select:focus,
+    .fg textarea:focus { border-color: #d4883a; }
+
+    .fg input::placeholder,
+    .fg textarea::placeholder {
+      color: #bbb;
+    }
+
+    .fg textarea { resize: vertical; min-height: 88px; }
+    .fg select option { background: #f0eee8; }
+    .f2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .f-submit {
+      width: 100%;
+      padding: 0.95rem;
+      background: #1e2535;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .f-submit:hover { background: #d4883a; color: #fff; }
+
+    .f-note {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: #aaa;
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    .f-success {
+      display: none;
+      padding: 2.5rem;
+      text-align: center;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #1e2535;
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer {
+      background: #1e2535;
+      color: rgba(255,255,255,0.4);
+      padding: 4rem 2rem 2.5rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .fb-name {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .footer-col h4 {
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 1.1rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.55rem; }
+
+    .footer-col ul a {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.2s;
+    }
+
+    .footer-col ul a:hover { color: #fff; }
+
+    .footer-col address {
+      font-style: normal;
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    .footer-col address a {
+      color: rgba(255,255,255,0.45);
+      transition: color 0.2s;
+    }
+
+    .footer-col address a:hover { color: #fff; }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════
+       REVEAL ANIMATION
+    ═══════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+
+    /* ── HAMBURGER ANIMATED ── */
+    .nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── TABLET (≤980px) ── */
+    @media (max-width: 980px) {
+      .inner { padding: 0 1.5rem; }
+
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 60px; left: 0; right: 0; bottom: 0;
+        background: #1e2535;
+        padding: 2rem;
+        gap: 0;
+        align-items: stretch;
+        z-index: 499;
+        overflow-y: auto;
+      }
+      .nav-menu li { border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .nav-menu a { display: block; padding: 1.1rem 0; font-size: 0.75rem; }
+      .nav-menu .book-link > a {
+        margin-top: 1rem;
+        display: block;
+        text-align: center;
+        padding: 0.85rem;
+        background: #d4883a;
+        color: #fff;
+      }
+      .nav-toggle { display: flex; }
+      .nav-open .nav-menu { display: flex; }
+      .scheme-badge { display: none; }
+
+      .bio-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .bio-photos { grid-template-columns: 1fr 1fr; }
+      .bio-photo.tall { grid-column: span 2; aspect-ratio: 16/9; }
+      .stat-strip { grid-template-columns: 1fr 1fr; }
+      .stat-cell:nth-child(2) { border-right: none; }
+      .stat-cell:nth-child(1),
+      .stat-cell:nth-child(2) { border-bottom: 1px solid #e0e0e0; }
+
+      .what-ido-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      .venues-cols  { grid-template-columns: 1fr 1fr; }
+
+      .photo-strip  { grid-template-columns: 1fr 1fr; height: 300px; }
+
+      .listen-grid  { grid-template-columns: 1fr 1fr; }
+      .audio-track-list { grid-template-columns: 1fr; }
+
+      .booking-split { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    /* ── MOBILE (≤640px) ── */
+    @media (max-width: 640px) {
+      .section { padding: 3.5rem 1.25rem; }
+
+      .hero-name { font-size: clamp(2.2rem, 12vw, 3.5rem); letter-spacing: 0.06em; }
+      .hero-sub  { font-size: 0.62rem; letter-spacing: 0.22em; }
+      .hero-ctas { flex-direction: column; align-items: center; gap: 0.75rem; }
+      .cta-btn   { width: 100%; max-width: 260px; text-align: center; }
+      .hero-scroll { display: none; }
+
+      .what-ido-card  { padding: 2.2rem 1.5rem; }
+
+      .venues-cols  { grid-template-columns: 1fr; }
+
+      .perf-table td { padding: 1rem 0.25rem; }
+      .td-tag { display: none; }
+      .td-date { font-size: 0.58rem; width: 70px; }
+
+      .photo-strip { grid-template-columns: 1fr 1fr; height: 200px; }
+
+      .listen-grid  { grid-template-columns: 1fr; }
+
+      .bio-photos { grid-template-columns: 1fr; }
+      .bio-photo.tall { grid-column: span 1; aspect-ratio: 4/3; }
+      .bio-photo:not(.tall) { display: none; }
+
+      .stat-strip { grid-template-columns: 1fr 1fr; }
+
+      .booking-form { padding: 1.5rem; }
+      .f2col { grid-template-columns: 1fr; }
+
+      .footer-inner { grid-template-columns: 1fr; }
+
+      .quote-band { padding: 1.75rem 1.25rem; }
+
+      .venues-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ═══════════════════════════════════════
+       AUDIO PLAYER
+    ═══════════════════════════════════════ */
+    .audio-section {
+      margin-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+    }
+
+    .audio-section-label {
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #d4883a;
+      margin-bottom: 1.25rem;
+    }
+
+    .audio-track-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .audio-track {
+      background: #242e42;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .audio-track:hover { background: #2a3448; }
+
+    .audio-track-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .audio-play-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .audio-play-btn:hover,
+    .audio-track.playing .audio-play-btn {
+      background: #d4883a;
+      border-color: #d4883a;
+    }
+
+    .audio-play-btn svg {
+      width: 16px; height: 16px;
+      fill: #fff;
+      margin-left: 2px;
+    }
+
+    .audio-play-btn .icon-pause { margin-left: 0; }
+
+    .audio-track-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .audio-track-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.03em;
+    }
+
+    .audio-track-artist {
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.08em;
+    }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .audio-time,
+    .audio-duration {
+      font-size: 0.6rem;
+      font-weight: 500;
+      font-family: 'Courier New', monospace;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+      min-width: 32px;
+    }
+
+    .audio-duration { text-align: right; }
+
+    .audio-progress-wrap {
+      flex: 1;
+      cursor: pointer;
+      padding: 8px 0;
+    }
+
+    .audio-progress-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .audio-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #d4883a;
+      border-radius: 2px;
+      transition: width 0.1s linear;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a class="nav-logo" href="#">Paul Newkirk</a>
+  <span class="scheme-badge">Scheme 4 · Slate &amp; Amber</span>
+  <ul class="nav-menu" id="nav-menu">
+    <li><a href="#what-i-do">What I Do</a></li>
+    <li><a href="#listen">Watch &amp; Listen</a></li>
+    <li><a href="#about">About Paul</a></li>
+    <li><a href="#venues">Where I've Performed</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li class="book-link"><a href="#contact">Book Now</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="slides" id="slideshow">
+    <div class="slide active">
+      <img src="images/1.jpeg" alt="Paul Newkirk at the Atlanta History Center">
+    </div>
+    <div class="slide">
+      <img src="images/Paul-Island-Acoustic.jpeg" alt="Paul Newkirk Island Acoustic">
+    </div>
+    <div class="slide">
+      <img src="images/AJTPics/AtlantaJazzTrio-at-diner.jpeg" alt="Atlanta Jazz Trio at the diner">
+    </div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-name">Paul Newkirk</h1>
+    <p class="hero-sub">Solo Guitar/Vocals &nbsp;·&nbsp; Duos, Trios and larger bands &nbsp; &nbsp; Jazz, Pop, Rock &amp; Country &nbsp;·&nbsp; Atlanta, GA</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="cta-btn primary">Book an Event</a>
+      <a href="#listen"  class="cta-btn">Watch &amp; Listen</a>
+      <a href="#performances" class="cta-btn">Upcoming Dates</a>
+    </div>
+  </div>
+  <div class="slide-dots" id="slide-dots"></div>
+  <div class="hero-scroll" onclick="document.getElementById('what-i-do').scrollIntoView({behavior:'smooth'})">
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ══ QUOTE ══ -->
+<div class="quote-band">
+  <blockquote>
+    "Great guy – friendly, courteous, flexible. Asked how we preferred him to dress, where to set up, etc. Really concerned with making sure we were happy!!"
+    <cite>— Ashford Club</cite>
+  </blockquote>
+</div>
+
+<!-- ══ WHAT I DO ══ -->
+<section class="section" id="what-i-do">
+  <div class="inner">
+    <div class="reveal">
+      <p class="section-label">Services</p>
+      <h2 class="section-heading">What I Do</h2>
+      <div class="rule"></div>
+    </div>
+    
+    <div class="what-ido-grid">
+      <!-- Card 1: Solo Piano & Keyboards -->
+      <div class="what-ido-card reveal">
+        <h3>Solo Guitar &amp; Vocals</h3>
+        <p>
+          I have performed as a solo guitarist and vocalist for more than 30 years. During this time I've played multi-year engagements at several Atlanta venues, including Dante's Down the Hatch, Hollihan's, Basils and many others. I have a large repertoire of jazz, pop, rock, and country music, and can provide a setlist tailored to your event.
+        </p>
+      </div>
+
+      <!-- Card 2: Duo & Trio Performances -->
+      <div class="what-ido-card reveal delay-1">
+        <h3>Duo &amp; Trio Performances</h3>
+        <p>
+          Smaller groups are often a great balance of sound, flexibility, and budget. Available configurations include:
+        </p>
+        <ul class="what-ido-list" style="margin-bottom: 1.5rem;">
+          <li>Jazz trio - Piano, bass drums (listen <a href="#listen" style="text-decoration: underline; color: #d4883a; font-weight: 500;">here</a>)</li>
+          <li>Guitar, bass and vocals </li>
+          <li>Steel pan and Island music </li>
+          <li>Piano, bass and vocals</li>
+        </ul>
+        <p>
+          I also perform regularly with jazz trios throughout Atlanta, including more than 30 years with the Atlanta Jazz Trio (listen <a href="#listen" style="text-decoration: underline; color: #d4883a; font-weight: 500;">here</a>).
+        </p>
+      </div>
+
+      <!-- Card 3: Larger Groups -->
+      <div class="what-ido-card reveal">
+        <h3>Larger Groups</h3>
+        <p>
+          For events that call for a bigger sound, I can provide several ensemble options:
+        </p>
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.9rem; font-weight: 600; color: #1e2535; margin-bottom: 0.5rem;">Atlanta Jazz Quartet</h4>
+          <ul class="what-ido-list" style="margin-bottom: 1rem;">
+            <li>Available with our vocalist or saxophonist</li>
+            <li>Ideal for receptions, corporate events, and private parties</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size: 0.9rem; font-weight: 600; color: #1e2535; margin-bottom: 0.5rem;">The Atlanta Crawdaddies</h4>
+          <ul class="what-ido-list">
+            <li>A New Orleans-inspired group featuring 1–4 horns</li>
+            <li>Repertoire includes jazz, blues, R&amp;B, classic rock, and some country</li>
+            <li>Learn more <a href="#listen" style="text-decoration: underline; color: #d4883a; font-weight: 500;">here</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 4: On the Day of Your Event -->
+      <div class="what-ido-card reveal delay-1">
+        <h3>On the Day of Your Event</h3>
+        <p>
+          I perform at many events every year, but on the day of your event, that's my focus. I'm meticulous about preparation, so you can expect:
+        </p>
+        <ul class="what-ido-list" style="margin-bottom: 1.5rem;">
+          <li>Arrival and setup with plenty of time to spare</li>
+          <li>Time built in for traffic, sound checks, and last-minute adjustments</li>
+          <li>Backup keyboard, speaker, and cables on-site</li>
+          <li>Backup copies of any special music you've requested</li>
+        </ul>
+        <p style="font-style: italic; color: #777; font-weight: 400;">
+          My goal is simple: provide great music and make sure everything runs smoothly.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LISTEN / VIDEO ══ -->
+<section class="section section-dark" id="listen">
+  <div class="inner">
+    <p class="section-label reveal">Music / Video</p>
+    <h2 class="section-heading reveal">Watch &amp; Listen</h2>
+    <div class="listen-grid">
+      <!-- Card 1: YouTube - Behind Blue Eyes -->
+      <a href="https://www.youtube.com/watch?v=zZ2BGF04rDw" target="_blank" rel="noopener" class="listen-card reveal">
+        <img src="images/Paul-BehindBlueEyes-Thumbnail.jpeg" alt="Paul Newkirk - Behind Blue Eyes">
+        <div class="play-btn">
+          <div class="play-circle">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="listen-caption">
+          <div class="lc-label">YouTube</div>
+          <div class="lc-title">Behind Blue Eyes</div>
+        </div>
+      </a>
+      <!-- Card 2: YouTube - Angel by Shaggy -->
+      <a href="https://www.youtube.com/watch?v=TgOX9hfaZ8c" target="_blank" rel="noopener" class="listen-card reveal delay-1">
+        <img src="images/angel.jpeg" alt="Paul Newkirk - Angel">
+        <div class="play-btn">
+          <div class="play-circle">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="listen-caption">
+          <div class="lc-label">YouTube</div>
+          <div class="lc-title">Angel by Shaggy</div>
+        </div>
+      </a>
+      <!-- Card 3: YouTube - Guitar and Vocals Demo -->
+      <a href="https://www.youtube.com/watch?v=IUHDAvuRABo" target="_blank" rel="noopener" class="listen-card reveal">
+        <img src="images/demo.jpeg" alt="Paul Newkirk - Guitar Demo">
+        <div class="play-btn">
+          <div class="play-circle">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="listen-caption">
+          <div class="lc-label">YouTube</div>
+          <div class="lc-title">Guitar and Vocals Demo</div>
+        </div>
+      </a>
+
+      <!-- Card 4: YouTube - You Can Close Your Eyes -->
+      <a href="https://www.youtube.com/watch?v=DwZ7PLICxaM" target="_blank" rel="noopener" class="listen-card reveal delay-1">
+        <img src="images/interview.jpeg" alt="Paul Newkirk - You Can Close Your Eyes">
+        <div class="play-btn">
+          <div class="play-circle">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="listen-caption">
+          <div class="lc-label">YouTube</div>
+          <div class="lc-title">You Can Close Your Eyes</div>
+        </div>
+      </a>
+
+      <!-- Card 5: Placeholder Video -->
+  
+      <div class="listen-card video-card reveal delay-1">
+        <video
+          poster="images/AJT-DeltaFlightMuseum Small.jpeg"
+          controls
+          preload="metadata"
+          style="width:100%;height:100%;object-fit:cover;display:block;"
+          aria-label="Atlanta Jazz Trio at the Delta flight museum"
+        >
+          <source src="video/AJT-DeltaFlightMuseum.mp4" type="video/mp4">
+          Your browser does not support embedded video. You can
+          <a href="video/AJT-DeltaFlightMuseum.mp4" target="_blank" rel="noopener">download it here</a>.
+        </video>
+        <div class="listen-caption">
+          <div class="lc-label">Live Performance</div>
+          <div class="lc-title">Delta Flight Museum with the Atlanta Jazz Trio</div>
+        </div>
+      </div>
+
+      <!-- Card 6: Placeholder Video -->
+      <div class="listen-card video-card reveal delay-1">
+        <video
+          poster="images/Kim-Williams-Atlanta-History-Center.jpeg"
+          controls
+          preload="metadata"
+          style="width:100%;height:100%;object-fit:cover;display:block;"
+          aria-label="Atlanta Jazz Trio at the Atlanta History Museum"
+        >
+          <source src="video/Atlanta-Jazz-Trio-Atlanta-History-Museum.mp4" type="video/mp4">
+          Your browser does not support embedded video. You can
+          <a href="video/Atlanta-Jazz-Trio-Atlanta-History-Museum.mp4" target="_blank" rel="noopener">download it here</a>.
+        </video>
+        <div class="listen-caption">
+          <div class="lc-label">Live Performance</div>
+          <div class="lc-title">Atlanta History Museum with the Atlanta Jazz Trio</div>
+        </div>
+      </div>
+    </div>
+    <!-- ══ AUDIO PLAYER ══ -->
+    <div class="audio-section">
+      <div class="audio-section-label">Featured Recordings</div>
+      <div class="audio-track-list">
+        <div class="audio-track" id="track-bigband">
+          <div class="audio-track-info">
+            <button class="audio-play-btn" onclick="toggleTrack('bigband')" aria-label="Play Big Band Swing">
+              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-track-meta">
+              <span class="audio-track-title">Big Band Swing Medley</span>
+              <span class="audio-track-artist">Paul Newkirk • Vocals & Guitar</span>
+            </div>
+          </div>
+          <div class="audio-controls">
+            <span class="audio-time" id="time-bigband">0:00</span>
+            <div class="audio-progress-wrap" onclick="seekTrack(event, 'bigband')">
+              <div class="audio-progress-bar">
+                <div class="audio-progress-fill" id="fill-bigband"></div>
+              </div>
+            </div>
+            <span class="audio-duration" id="dur-bigband">—</span>
+          </div>
+          <audio id="audio-bigband" src="https://atlantaeventmusic.com/wp-content/uploads/2017/02/Jazz-Vocal-Teaser_converted.mp3" preload="metadata"></audio>
+        </div>
+
+        <div class="audio-track" id="track-bluebossa">
+          <div class="audio-track-info">
+            <button class="audio-play-btn" onclick="toggleTrack('bluebossa')" aria-label="Play Blue Bossa">
+              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-track-meta">
+              <span class="audio-track-title">Blue Bossa</span>
+              <span class="audio-track-artist">Paul Newkirk • Guitar & Paul Vogler • Marimba</span>
+            </div>
+          </div>
+          <div class="audio-controls">
+            <span class="audio-time" id="time-bluebossa">0:00</span>
+            <div class="audio-progress-wrap" onclick="seekTrack(event, 'bluebossa')">
+              <div class="audio-progress-bar">
+                <div class="audio-progress-fill" id="fill-bluebossa"></div>
+              </div>
+            </div>
+            <span class="audio-duration" id="dur-bluebossa">—</span>
+          </div>
+          <audio id="audio-bluebossa" src="https://atlantaeventmusic.com/wp-content/uploads/2017/02/Vogler-and-Newkirk-Blue-Bossa-on-Guitar-and-Steel-Pan.mp3" preload="metadata"></audio>
+        </div>
+
+        <div class="audio-track" id="track-itsmyjob">
+          <div class="audio-track-info">
+            <button class="audio-play-btn" onclick="toggleTrack('itsmyjob')" aria-label="Play It's My Job">
+              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-track-meta">
+              <span class="audio-track-title">It's My Job</span>
+              <span class="audio-track-artist">Paul Newkirk</span>
+            </div>
+          </div>
+          <div class="audio-controls">
+            <span class="audio-time" id="time-itsmyjob">0:00</span>
+            <div class="audio-progress-wrap" onclick="seekTrack(event, 'itsmyjob')">
+              <div class="audio-progress-bar">
+                <div class="audio-progress-fill" id="fill-itsmyjob"></div>
+              </div>
+            </div>
+            <span class="audio-duration" id="dur-itsmyjob">—</span>
+          </div>
+          <audio id="audio-itsmyjob" src="https://atlantaeventmusic.com/wp-content/uploads/2017/02/Its-My-Job-1.mp3" preload="metadata"></audio>
+        </div>
+
+        <div class="audio-track" id="track-alwaysawoman">
+          <div class="audio-track-info">
+            <button class="audio-play-btn" onclick="toggleTrack('alwaysawoman')" aria-label="Play Always A Woman">
+              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-track-meta">
+              <span class="audio-track-title">Always A Woman</span>
+              <span class="audio-track-artist">Paul Newkirk</span>
+            </div>
+          </div>
+          <div class="audio-controls">
+            <span class="audio-time" id="time-alwaysawoman">0:00</span>
+            <div class="audio-progress-wrap" onclick="seekTrack(event, 'alwaysawoman')">
+              <div class="audio-progress-bar">
+                <div class="audio-progress-fill" id="fill-alwaysawoman"></div>
+              </div>
+            </div>
+            <span class="audio-duration" id="dur-alwaysawoman">—</span>
+          </div>
+          <audio id="audio-alwaysawoman" src="https://atlantaeventmusic.com/wp-content/uploads/2017/02/Always-A-Woman-11-1.mp3" preload="metadata"></audio>
+        </div>
+
+        <div class="audio-track" id="track-cityneworleans">
+          <div class="audio-track-info">
+            <button class="audio-play-btn" onclick="toggleTrack('cityneworleans')" aria-label="Play City of New Orleans">
+              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-track-meta">
+              <span class="audio-track-title">City of New Orleans</span>
+              <span class="audio-track-artist">Paul Newkirk</span>
+            </div>
+          </div>
+          <div class="audio-controls">
+            <span class="audio-time" id="time-cityneworleans">0:00</span>
+            <div class="audio-progress-wrap" onclick="seekTrack(event, 'cityneworleans')">
+              <div class="audio-progress-bar">
+                <div class="audio-progress-fill" id="fill-cityneworleans"></div>
+              </div>
+            </div>
+            <span class="audio-duration" id="dur-cityneworleans">—</span>
+          </div>
+          <audio id="audio-cityneworleans" src="https://atlantaeventmusic.com/wp-content/uploads/2017/02/City-Of-New-Orleans-1.mp3" preload="metadata"></audio>
+        </div>
+
+        <div class="audio-track" id="track-muskratlove">
+          <div class="audio-track-info">
+            <button class="audio-play-btn" onclick="toggleTrack('muskratlove')" aria-label="Play Muskrat Love">
+              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="audio-track-meta">
+              <span class="audio-track-title">Muskrat Love</span>
+              <span class="audio-track-artist">Paul Newkirk</span>
+            </div>
+          </div>
+          <div class="audio-controls">
+            <span class="audio-time" id="time-muskratlove">0:00</span>
+            <div class="audio-progress-wrap" onclick="seekTrack(event, 'muskratlove')">
+              <div class="audio-progress-bar">
+                <div class="audio-progress-fill" id="fill-muskratlove"></div>
+              </div>
+            </div>
+            <span class="audio-duration" id="dur-muskratlove">—</span>
+          </div>
+          <audio id="audio-muskratlove" src="https://atlantaeventmusic.com/wp-content/uploads/2017/02/Muskrat-Love-1.mp3" preload="metadata"></audio>
+        </div>
+      </div>
+    </div>
+    <div class="listen-more reveal">
+      <a href="https://www.youtube.com/results?search_query=paul+newkirk+guitar" target="_blank" rel="noopener">
+        View All on YouTube →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BIO ══ -->
+<section class="section" id="about">
+  <div class="inner">
+    <div class="bio-grid">
+      <div class="bio-text reveal">
+        <p class="section-label">About</p>
+        <h2 class="section-heading">About Paul</h2>
+        <div class="rule"></div>
+        <p>
+          <strong>Paul Newkirk</strong>  Paul provides quality entertainment for corporate and private events looking for gentle background music or an entire one man show with vocals.
+        </p>
+        <div class="bio-pull">
+          "Jazz is the foundation — but the music goes wherever the room needs it to go."
+        </div>
+        <p>
+        A regular performer at metro Atlanta restaurants, Paul excels at Jimmy Buffet, James Taylor, The Eagles and more. A sure crowd-pleaser, Paul’s smooth vocals and large and diverse repertoire provide the perfect environment for enjoyable entertaining.
+        </p>
+        <p>
+          Based in Atlanta and available throughout Georgia, the Southeast, and nationally
+          for destination events and special occasions. Solo guitar/vocals, duo, and ensemble
+          configurations all available.
+        </p>
+        <div class="stat-strip reveal">
+          <div class="stat-cell">
+            <div class="n">30+</div>
+            <div class="l">Years Performing</div>
+          </div>
+          <div class="stat-cell">
+            <div class="n">100s</div>
+            <div class="l">Atlanta Venues</div>
+          </div>
+          <div class="stat-cell">
+            <div class="n">4</div>
+            <div class="l">Core Genres</div>
+          </div>
+          <div class="stat-cell">
+            <div class="n">ATL</div>
+            <div class="l">Home Base</div>
+          </div>
+        </div>
+      </div>
+      <!-- photos col -->
+      <div class="bio-photos reveal delay-2">
+        <div class="bio-photo tall">
+          <img src="images/Paul-Axtell.jpeg" alt="Paul Newkirk at the piano">
+        </div>
+        <!--<div class="bio-photo tall">
+          <img src="images/Kim-Williams-at-the-grand.jpg" alt="Kim Williams at the piano">
+        </div>
+        <div class="bio-photo placeholder">
+          <span>Add photo</span>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PHOTO STRIP ══ -->
+<div class="photo-strip">
+  <div class="ps-item">
+    <img src="images/Atl_Craws.png" alt="Kim Williams with the Crawdaddies">
+  </div>
+  <div class="ps-item">
+    <img src="images/AJTPics/AtlantaJazzTrio-Delta.jpeg" alt="Atlanta Jazz Trio at Delta">
+  </div>
+  <div class="ps-item">
+    <img src="images/AJTPics/Crawdaddies-BlindWillies.jpeg" alt="Crawdaddies at Blind Willie's">
+  </div>
+  <div class="ps-item">
+    <img src="images/AJTPics/AtlantaJazzTrio-PuppetryArts.jpeg" alt="Atlanta Jazz Trio at the Center for Puppetry Arts">
+  </div>
+</div>
+
+<!-- ══ VENUES ══ -->
+<section class="section section-gray" id="venues">
+  <div class="inner">
+    <div class="venues-header reveal">
+      <div>
+        <p class="section-label">Experience</p>
+        <h2 class="section-heading">Trusted By Atlanta<br>Venues & Organizations</h2>
+      </div>
+    </div>
+    <div class="venues-cols">
+      <div class="reveal">
+        <div class="vc-head">Restaurants &amp; Bars</div>
+        <ul class="vc-list">
+          <li>Blind Willie's</li>
+          <li>C. Ellet's Steakhouse</li>
+          <li>Kapow Sushi &amp; Thai <em>House Band 2023–24</em></li>
+          <li>Marietta Wine Bar</li>
+          <li>Stillfire Brewing</li>
+          <li>The Cigar Cellar</li>
+          <li>The Grotto</li>
+          <li>Rose &amp; Crown</li>
+        </ul>
+      </div>
+      <div class="reveal delay-1">
+        <div class="vc-head">Landmark Venues</div>
+        <ul class="vc-list">
+          <li>Mercedes-Benz Stadium</li>
+          <li>Omni Hotel Atlanta</li>
+          <li>Georgia Aquarium</li>
+          <li>World of Coca-Cola</li>
+          <li>Ritz-Carlton Atlanta</li>
+          <li>Atlanta History Center</li>
+          <li>Atlanta Botanical Gardens</li>
+        </ul>
+      </div>
+      <div class="reveal delay-1">
+        <div class="vc-head">Country Clubs</div>
+        <ul class="vc-list">
+          <li>Capital City Club</li>
+          <li>Atlanta Country Club</li>
+          <li>Piedmont Driving Club</li>
+          <li>Marietta Country Club</li>
+          <li>Cherokee Town and Country Club</li>
+          <li>Atlanta Athletic Club</li>
+          <li>Ansley Golf Club</li>
+          <li>Druid Hills Golf Club</li>
+        </ul>
+      </div>
+      <div class="reveal delay-2">
+       
+    </div>
+    </div>
+    </div>
+    <p class="venues-note reveal">…and hundreds more across Atlanta and the Southeast over three decades of performing.</p>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="section" id="faq">
+  <div class="inner" style="max-width:780px;">
+    <p class="section-label reveal">FAQ</p>
+    <h2 class="section-heading reveal">Frequently Asked<br>Questions</h2>
+    <div class="faq-list reveal">
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q">What styles of music do you perform?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <p>Jazz is the core — standards, bebop, hard bop, and bossa nova — but the repertoire extends broadly through pop, rock, classical, soul, and R&amp;B. Every event gets a playlist shaped to the occasion and the audience.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q">Do you perform solo or with a band?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <p>Both. Solo piano works beautifully for cocktail hours, intimate dinners, and background settings. For larger events, duo and trio configurations with bass and/or drums can be arranged. Just ask when you inquire.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q">How do I book and what does the process look like?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <p>Use the contact form or email directly. I'll respond within 24 hours to confirm availability and discuss your event. Once we agree on details, a simple contract and deposit secures the date.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q">Do you travel outside Atlanta?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <p>Absolutely. Performances throughout Georgia and the Southeast are standard. Nationwide travel is available for destination events, weddings, and special occasions — travel costs are included transparently in any quote.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q">Do you bring your own piano and equipment?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <p>A professional digital piano and PA system are available for events that don't have a piano. If your venue has an acoustic grand or upright piano, that's preferred — just let me know at booking.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q">Can I request specific songs?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <p>Yes — special requests are always welcome. The repertoire spans thousands of songs across genres. Share your list when booking and we'll make it work.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-q">How far in advance should I book?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <p>2+ weeks ahead is ideal. For weddings and large corporate events, earlier is better — popular dates book out months in advance. Last-minute requests are always considered when the calendar allows.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOOKING / CONTACT ══ -->
+<section class="section section-dark" id="contact">
+  <div class="inner">
+    <div class="booking-split">
+      <div class="booking-info reveal">
+        <p class="section-label">Bookings &amp; Contact</p>
+        <h2 class="section-heading">Let's Make Your<br>Event Unforgettable</h2>
+        <div class="rule"></div>
+        <p class="intro">
+          Available for weddings, corporate events, private dinners, gallery openings,
+          club dates, cocktail hours, and more — throughout Atlanta and beyond.
+        </p>
+        <div class="contact-rows">
+          <div class="cr">
+            <span class="cr-label">Email</span>
+            <span class="cr-value"><a href="mailto:hello@kimwilliamspiano.com">hello@kimwilliamspiano.com</a></span>
+          </div>
+          <div class="cr">
+            <span class="cr-label">Phone</span>
+            <span class="cr-value"><a href="tel:+1">Add your number</a></span>
+          </div>
+          <div class="cr">
+            <span class="cr-label">Location</span>
+            <span class="cr-value">Atlanta, GA &amp; Southeast US</span>
+          </div>
+          <div class="cr">
+            <span class="cr-label">Travel</span>
+            <span class="cr-value">Nationwide for special occasions</span>
+          </div>
+          <div class="cr">
+            <span class="cr-label">Lead Time</span>
+            <span class="cr-value">2+ weeks preferred; last-minute welcomed</span>
+          </div>
+          <div class="cr">
+            <span class="cr-label">Sets</span>
+            <span class="cr-value">1–4 hour sets; custom arrangements available</span>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://www.youtube.com/@kimwilliamspiano" target="_blank" rel="noopener" class="social-btn">YouTube</a>
+          <a href="#" class="social-btn">Facebook</a>
+          <a href="#" class="social-btn">Instagram</a>
+        </div>
+      </div>
+      <div class="reveal delay-2">
+        <div class="booking-form">
+          <div class="bf-title">Send an Inquiry</div>
+          <div id="bform">
+            <div class="f2col">
+              <div class="fg">
+                <label for="c-fname">First Name</label>
+                <input type="text" id="c-fname" placeholder="First name" autocomplete="given-name">
+              </div>
+              <div class="fg">
+                <label for="c-lname">Last Name</label>
+                <input type="text" id="c-lname" placeholder="Last name" autocomplete="family-name">
+              </div>
+            </div>
+            <div class="fg">
+              <label for="c-email">Email</label>
+              <input type="email" id="c-email" placeholder="your@email.com" autocomplete="email">
+            </div>
+            <div class="fg">
+              <label for="c-phone">Phone (optional)</label>
+              <input type="tel" id="c-phone" placeholder="+1 (___) ___-____">
+            </div>
+            <div class="f2col">
+              <div class="fg">
+                <label for="c-date">Event Date</label>
+                <input type="date" id="c-date">
+              </div>
+              <div class="fg">
+                <label for="c-type">Event Type</label>
+                <select id="c-type">
+                  <option value="" disabled selected>Select…</option>
+                  <option>Wedding / Reception</option>
+                  <option>Corporate Event</option>
+                  <option>Private Dinner</option>
+                  <option>Cocktail Hour</option>
+                  <option>Gallery / Exhibition</option>
+                  <option>Club / Bar Date</option>
+                  <option>Birthday / Celebration</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="c-venue">Venue / Location</label>
+              <input type="text" id="c-venue" placeholder="Venue name or city">
+            </div>
+            <div class="fg">
+              <label for="c-msg">Details</label>
+              <textarea id="c-msg" placeholder="Duration, style preferences, special requests…"></textarea>
+            </div>
+            <button class="f-submit" onclick="handleBook()">Send Inquiry</button>
+            <p class="f-note">No commitment required · Response within 24 hours</p>
+          </div>
+          <div class="f-success" id="f-success">
+            Thank you — your inquiry has been received.<br>
+            <span style="font-size:0.72rem;color:#888;font-family:'Montserrat',sans-serif;font-style:normal;font-weight:300;letter-spacing:0.06em;">
+              Expect a reply within 24 hours.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fb-name">Kim Williams Piano</div>
+      <p>Three decades of live piano across Atlanta and the Southeast — jazz, pop, rock, and classical for weddings, events, and private occasions.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#what-i-do">What I Do</a></li>
+        <li><a href="#listen">Watch &amp; Listen</a></li>
+        <li><a href="#about">About Kim</a></li>
+        <li><a href="#venues">Where I've Performed</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <address>
+        Atlanta, Georgia<br>
+        <a href="mailto:hello@kimwilliamspiano.com">hello@kimwilliamspiano.com</a><br>
+        <a href="https://www.youtube.com/@kimwilliamspiano" target="_blank" rel="noopener">YouTube</a><br>
+        Available SE US &amp; Nationwide
+      </address>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Kim Williams Piano · All rights reserved</p>
+    <p>kimwilliamspiano.com · Atlanta, GA</p>
+  </div>
+</footer>
+
+<script>
+  /* ── NAV ── */
+  const nav      = document.getElementById('nav');
+  const toggle   = document.getElementById('nav-toggle');
+  const body     = document.body;
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('solid', window.scrollY > 80);
+  });
+
+  toggle.addEventListener('click', () => {
+    body.classList.toggle('nav-open');
+  });
+
+  /* Close nav on link click */
+  document.querySelectorAll('.nav-menu a').forEach(a => {
+    a.addEventListener('click', () => body.classList.remove('nav-open'));
+  });
+
+  /* ── SLIDESHOW ── */
+  const slides    = document.querySelectorAll('.slide');
+  const dotsWrap  = document.getElementById('slide-dots');
+  let current     = 0;
+  let timer;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i+1));
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(advance, 5000);
+  }
+
+  function advance() {
+    goTo((current + 1) % slides.length);
+  }
+
+  timer = setInterval(advance, 5000);
+
+  /* ── SCROLL REVEAL ── */
+  const revEls = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revEls.forEach(el => ro.observe(el));
+
+  /* ── FAQ ── */
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const icon = btn.querySelector('.faq-icon');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-icon').textContent = '+';
+      el.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      icon.textContent = '−';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  /* ── BOOKING FORM ── */
+  function handleBook() {
+    const fname = document.getElementById('c-fname').value.trim();
+    const email = document.getElementById('c-email').value.trim();
+    if (!fname || !email) {
+      alert('Please fill in your name and email address.');
+      return;
+    }
+    document.getElementById('bform').style.display = 'none';
+    document.getElementById('f-success').style.display = 'block';
+  }
+  /* ── AUDIO PLAYER ── */
+  const audioPlayers = {};
+
+  function initAudio(id) {
+    if (audioPlayers[id]) return audioPlayers[id];
+    const audio  = document.getElementById('audio-' + id);
+    const fill   = document.getElementById('fill-' + id);
+    const timeEl = document.getElementById('time-' + id);
+    const durEl  = document.getElementById('dur-' + id);
+    const track  = document.getElementById('track-' + id);
+
+    audio.addEventListener('loadedmetadata', () => {
+      durEl.textContent = fmtTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      timeEl.textContent = fmtTime(audio.currentTime);
+    });
+
+    audio.addEventListener('ended', () => {
+      track.classList.remove('playing');
+      track.querySelector('.icon-play').style.display  = '';
+      track.querySelector('.icon-pause').style.display = 'none';
+      fill.style.width = '0%';
+      timeEl.textContent = '0:00';
+    });
+
+    audioPlayers[id] = { audio, fill, timeEl, durEl, track };
+    return audioPlayers[id];
+  }
+
+  function toggleTrack(id) {
+    const p = initAudio(id);
+    const playIcon  = p.track.querySelector('.icon-play');
+    const pauseIcon = p.track.querySelector('.icon-pause');
+
+    Object.keys(audioPlayers).forEach(otherId => {
+      if (otherId !== id) {
+        const o = audioPlayers[otherId];
+        o.audio.pause();
+        o.track.classList.remove('playing');
+        o.track.querySelector('.icon-play').style.display  = '';
+        o.track.querySelector('.icon-pause').style.display = 'none';
+      }
+    });
+
+    if (p.audio.paused) {
+      p.audio.play();
+      p.track.classList.add('playing');
+      playIcon.style.display  = 'none';
+      pauseIcon.style.display = '';
+    } else {
+      p.audio.pause();
+      p.track.classList.remove('playing');
+      playIcon.style.display  = '';
+      pauseIcon.style.display = 'none';
+    }
+  }
+
+  function seekTrack(event, id) {
+    const p = initAudio(id);
+    if (!p.audio.duration) return;
+    const bar  = event.currentTarget.querySelector('.audio-progress-bar');
+    const rect = bar.getBoundingClientRect();
+    const pct  = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+    p.audio.currentTime = pct * p.audio.duration;
+  }
+
+  function fmtTime(s) {
+    if (!isFinite(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return m + ':' + String(sec).padStart(2, '0');
+  }
+</script>
+</body>
+</html>

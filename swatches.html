@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kim Williams Piano — Color Scheme Swatches</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f0ede8;
+      padding: 3rem 2rem;
+      min-height: 100vh;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .page-sub {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: #333;
+    }
+
+    .schemes {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ── EACH SCHEME CARD ── */
+    .scheme {
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+    }
+
+    .scheme-label {
+      background: #fff;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .scheme-num {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #bbb;
+    }
+
+    .scheme-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #111;
+    }
+
+    .scheme-tagline {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #888;
+      margin-left: auto;
+    }
+
+    /* ── MINI SITE PREVIEW ── */
+    .preview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 340px;
+    }
+
+    /* LEFT: dark panel (hero/nav simulation) */
+    .p-dark {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .p-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .p-nav-logo {
+      font-size: 0.55rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .p-nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .p-nav-link {
+      font-size: 0.48rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .p-hero-tag {
+      font-size: 0.48rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 0.5rem;
+    }
+
+    .p-hero-name {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .p-hero-sub {
+      font-size: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 1.2rem;
+    }
+
+    .p-btn {
+      display: inline-block;
+      font-size: 0.48rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border: 1px solid;
+      margin-right: 0.5rem;
+    }
+
+    .p-quote {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 0.72rem;
+      opacity: 0.55;
+      padding-top: 1.2rem;
+      border-top: 1px solid;
+      margin-top: auto;
+    }
+
+    /* RIGHT: light panel (content simulation) */
+    .p-light {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .p-section-label {
+      font-size: 0.48rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-bottom: 0.3rem;
+    }
+
+    .p-section-heading {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .p-rule {
+      width: 28px; height: 2px;
+      margin-bottom: 0.8rem;
+    }
+
+    .p-body {
+      font-size: 0.65rem;
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0.7;
+      margin-bottom: 0.8rem;
+    }
+
+    .p-genre-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .p-genre {
+      padding: 0.6rem 0.5rem;
+      font-size: 0.48rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .p-perf-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid;
+      font-size: 0.6rem;
+    }
+
+    .p-perf-date {
+      font-size: 0.48rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      width: 40px;
+    }
+
+    .p-perf-venue { font-weight: 600; font-size: 0.62rem; }
+    .p-perf-tag {
+      font-size: 0.44rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid;
+      padding: 0.2rem 0.4rem;
+    }
+
+    /* ── SWATCH ROW ── */
+    .swatch-row {
+      background: #fff;
+      padding: 1rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      border-top: 1px solid #e8e8e8;
+      flex-wrap: wrap;
+    }
+
+    .swatch-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .swatch-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+
+    .swatch-info { }
+    .swatch-role {
+      font-size: 0.48rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #aaa;
+      display: block;
+    }
+
+    .swatch-hex {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: #444;
+      font-family: monospace;
+    }
+
+    /* ════════════════════════════════════
+       SCHEME 1 — Midnight Blue & Ivory
+    ════════════════════════════════════ */
+    .s1-dark  { background: #0f1b2d; color: #f0ece4; }
+    .s1-light { background: #f0ece4; color: #0f1b2d; }
+    .s1-accent { color: #c9a84c; }
+    .s1-btn-fill { background: #c9a84c; color: #0f1b2d; border-color: #c9a84c; }
+    .s1-btn-out  { border-color: rgba(240,236,228,0.5); color: #f0ece4; }
+    .s1-rule { background: #c9a84c; }
+    .s1-genre { background: rgba(201,168,76,0.08); color: #0f1b2d; }
+    .s1-quote-border { border-color: rgba(240,236,228,0.12); }
+    .s1-perf-border  { border-color: #d8d2c8; }
+    .s1-perf-tag     { border-color: #0f1b2d; color: #0f1b2d; }
+    .s1-nav-accent   { color: #c9a84c; }
+
+    /* ════════════════════════════════════
+       SCHEME 2 — Warm Charcoal & Cream
+    ════════════════════════════════════ */
+    .s2-dark  { background: #2a2520; color: #f2ede5; }
+    .s2-light { background: #f2ede5; color: #2a2520; }
+    .s2-accent { color: #b8742a; }
+    .s2-btn-fill { background: #b8742a; color: #fff; border-color: #b8742a; }
+    .s2-btn-out  { border-color: rgba(242,237,229,0.45); color: #f2ede5; }
+    .s2-rule { background: #b8742a; }
+    .s2-genre { background: rgba(184,116,42,0.09); color: #2a2520; }
+    .s2-quote-border { border-color: rgba(242,237,229,0.1); }
+    .s2-perf-border  { border-color: #ddd6cb; }
+    .s2-perf-tag     { border-color: #2a2520; color: #2a2520; }
+
+    /* ════════════════════════════════════
+       SCHEME 3 — Deep Forest Green & Champagne
+    ════════════════════════════════════ */
+    .s3-dark  { background: #182a1c; color: #f4eedc; }
+    .s3-light { background: #f4eedc; color: #182a1c; }
+    .s3-accent { color: #c4a84a; }
+    .s3-btn-fill { background: #c4a84a; color: #182a1c; border-color: #c4a84a; }
+    .s3-btn-out  { border-color: rgba(244,238,220,0.45); color: #f4eedc; }
+    .s3-rule { background: #c4a84a; }
+    .s3-genre { background: rgba(196,168,74,0.08); color: #182a1c; }
+    .s3-quote-border { border-color: rgba(244,238,220,0.1); }
+    .s3-perf-border  { border-color: #ddd8c6; }
+    .s3-perf-tag     { border-color: #182a1c; color: #182a1c; }
+
+    /* ════════════════════════════════════
+       SCHEME 4 — Slate & Amber
+    ════════════════════════════════════ */
+    .s4-dark  { background: #1e2535; color: #f0eee8; }
+    .s4-light { background: #f0eee8; color: #1e2535; }
+    .s4-accent { color: #d4883a; }
+    .s4-btn-fill { background: #d4883a; color: #fff; border-color: #d4883a; }
+    .s4-btn-out  { border-color: rgba(240,238,232,0.45); color: #f0eee8; }
+    .s4-rule { background: #d4883a; }
+    .s4-genre { background: rgba(212,136,58,0.08); color: #1e2535; }
+    .s4-quote-border { border-color: rgba(240,238,232,0.1); }
+    .s4-perf-border  { border-color: #dddad4; }
+    .s4-perf-tag     { border-color: #1e2535; color: #1e2535; }
+
+    /* ════════════════════════════════════
+       SCHEME 5 — Deep Burgundy & Parchment
+    ════════════════════════════════════ */
+    .s5-dark  { background: #2d1017; color: #f5ede0; }
+    .s5-light { background: #f5ede0; color: #2d1017; }
+    .s5-accent { color: #c9956a; }
+    .s5-btn-fill { background: #c9956a; color: #2d1017; border-color: #c9956a; }
+    .s5-btn-out  { border-color: rgba(245,237,224,0.45); color: #f5ede0; }
+    .s5-rule { background: #c9956a; }
+    .s5-genre { background: rgba(201,149,106,0.1); color: #2d1017; }
+    .s5-quote-border { border-color: rgba(245,237,224,0.1); }
+    .s5-perf-border  { border-color: #dfd5c6; }
+    .s5-perf-tag     { border-color: #2d1017; color: #2d1017; }
+
+    @media (max-width: 700px) {
+      .preview { grid-template-columns: 1fr; }
+      .p-genre-row { grid-template-columns: 1fr 1fr; }
+      .scheme-tagline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <p class="page-title">Kim Williams Piano</p>
+  <p class="page-sub">Color Scheme Options — Preview Swatches</p>
+
+  <div class="schemes">
+
+    <!-- ═══════════════════ SCHEME 1 ═══════════════════ -->
+    <div class="scheme">
+      <div class="scheme-label">
+        <span class="scheme-num">01</span>
+        <span class="scheme-name">Midnight Blue &amp; Ivory</span>
+        <span class="scheme-tagline">Blue Note Records · Late-night jazz club</span>
+      </div>
+      <div class="preview">
+        <div class="p-dark s1-dark">
+          <div>
+            <div class="p-nav">
+              <span class="p-nav-logo s1-accent">Kim Williams Piano</span>
+              <div class="p-nav-links">
+                <span class="p-nav-link">Bio</span>
+                <span class="p-nav-link">Performances</span>
+                <span class="p-nav-link">Contact</span>
+              </div>
+            </div>
+            <div class="p-hero-tag s1-accent">Jazz · Pop · Rock · Classical · Atlanta GA</div>
+            <div class="p-hero-name">KIM<br>WILLIAMS</div>
+            <div class="p-hero-sub">Piano</div>
+            <span class="p-btn s1-btn-fill">Book an Event</span>
+            <span class="p-btn s1-btn-out">Watch &amp; Listen</span>
+          </div>
+          <div class="p-quote s1-quote-border">
+            "Music is the shorthand of emotion." — Tolstoy
+          </div>
+        </div>
+        <div class="p-light s1-light">
+          <div>
+            <div class="p-section-label">About</div>
+            <div class="p-section-heading">Kim Williams</div>
+            <div class="p-rule s1-rule"></div>
+            <div class="p-body">Atlanta-based pianist with three decades of experience across jazz, pop, rock, and classical. Available for weddings, corporate events, and private occasions.</div>
+          </div>
+          <div>
+            <div class="p-section-label">Musical Styles</div>
+            <div class="p-genre-row">
+              <div class="p-genre s1-genre">Jazz</div>
+              <div class="p-genre s1-genre">Pop</div>
+              <div class="p-genre s1-genre">Rock</div>
+              <div class="p-genre s1-genre">Classical</div>
+            </div>
+          </div>
+          <div>
+            <div class="p-section-label">Performances</div>
+            <div class="p-perf-row s1-perf-border">
+              <span class="p-perf-date">Jul 12</span>
+              <span class="p-perf-venue">The Painted Pin</span>
+              <span class="p-perf-tag s1-perf-tag">Jazz Night</span>
+            </div>
+            <div class="p-perf-row s1-perf-border">
+              <span class="p-perf-date">Aug 2</span>
+              <span class="p-perf-venue">Atlanta Botanical Garden</span>
+              <span class="p-perf-tag s1-perf-tag">Corporate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#0f1b2d;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark / Nav</span>
+            <span class="swatch-hex">#0f1b2d</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#1a2d45;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark Sections</span>
+            <span class="swatch-hex">#1a2d45</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#f0ece4;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Light BG</span>
+            <span class="swatch-hex">#f0ece4</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#c9a84c;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Accent / Gold</span>
+            <span class="swatch-hex">#c9a84c</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#e8dfd0;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Alt Light</span>
+            <span class="swatch-hex">#e8dfd0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ SCHEME 2 ═══════════════════ -->
+    <div class="scheme">
+      <div class="scheme-label">
+        <span class="scheme-num">02</span>
+        <span class="scheme-name">Warm Charcoal &amp; Cream</span>
+        <span class="scheme-tagline">Aged leather · Cognac · Bourbon lounge</span>
+      </div>
+      <div class="preview">
+        <div class="p-dark s2-dark">
+          <div>
+            <div class="p-nav">
+              <span class="p-nav-logo s2-accent">Kim Williams Piano</span>
+              <div class="p-nav-links">
+                <span class="p-nav-link">Bio</span>
+                <span class="p-nav-link">Performances</span>
+                <span class="p-nav-link">Contact</span>
+              </div>
+            </div>
+            <div class="p-hero-tag s2-accent">Jazz · Pop · Rock · Classical · Atlanta GA</div>
+            <div class="p-hero-name">KIM<br>WILLIAMS</div>
+            <div class="p-hero-sub">Piano</div>
+            <span class="p-btn s2-btn-fill">Book an Event</span>
+            <span class="p-btn s2-btn-out">Watch &amp; Listen</span>
+          </div>
+          <div class="p-quote s2-quote-border">
+            "Music is the shorthand of emotion." — Tolstoy
+          </div>
+        </div>
+        <div class="p-light s2-light">
+          <div>
+            <div class="p-section-label">About</div>
+            <div class="p-section-heading">Kim Williams</div>
+            <div class="p-rule s2-rule"></div>
+            <div class="p-body">Atlanta-based pianist with three decades of experience across jazz, pop, rock, and classical. Available for weddings, corporate events, and private occasions.</div>
+          </div>
+          <div>
+            <div class="p-section-label">Musical Styles</div>
+            <div class="p-genre-row">
+              <div class="p-genre s2-genre">Jazz</div>
+              <div class="p-genre s2-genre">Pop</div>
+              <div class="p-genre s2-genre">Rock</div>
+              <div class="p-genre s2-genre">Classical</div>
+            </div>
+          </div>
+          <div>
+            <div class="p-section-label">Performances</div>
+            <div class="p-perf-row s2-perf-border">
+              <span class="p-perf-date">Jul 12</span>
+              <span class="p-perf-venue">The Painted Pin</span>
+              <span class="p-perf-tag s2-perf-tag">Jazz Night</span>
+            </div>
+            <div class="p-perf-row s2-perf-border">
+              <span class="p-perf-date">Aug 2</span>
+              <span class="p-perf-venue">Atlanta Botanical Garden</span>
+              <span class="p-perf-tag s2-perf-tag">Corporate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#2a2520;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark / Nav</span>
+            <span class="swatch-hex">#2a2520</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#3d3530;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark Sections</span>
+            <span class="swatch-hex">#3d3530</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#f2ede5;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Light BG</span>
+            <span class="swatch-hex">#f2ede5</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#b8742a;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Accent / Cognac</span>
+            <span class="swatch-hex">#b8742a</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#e6ddd0;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Alt Light</span>
+            <span class="swatch-hex">#e6ddd0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ SCHEME 3 ═══════════════════ -->
+    <div class="scheme">
+      <div class="scheme-label">
+        <span class="scheme-num">03</span>
+        <span class="scheme-name">Deep Forest Green &amp; Champagne</span>
+        <span class="scheme-tagline">Distinctive · Unexpected · Refined</span>
+      </div>
+      <div class="preview">
+        <div class="p-dark s3-dark">
+          <div>
+            <div class="p-nav">
+              <span class="p-nav-logo s3-accent">Kim Williams Piano</span>
+              <div class="p-nav-links">
+                <span class="p-nav-link">Bio</span>
+                <span class="p-nav-link">Performances</span>
+                <span class="p-nav-link">Contact</span>
+              </div>
+            </div>
+            <div class="p-hero-tag s3-accent">Jazz · Pop · Rock · Classical · Atlanta GA</div>
+            <div class="p-hero-name">KIM<br>WILLIAMS</div>
+            <div class="p-hero-sub">Piano</div>
+            <span class="p-btn s3-btn-fill">Book an Event</span>
+            <span class="p-btn s3-btn-out">Watch &amp; Listen</span>
+          </div>
+          <div class="p-quote s3-quote-border">
+            "Music is the shorthand of emotion." — Tolstoy
+          </div>
+        </div>
+        <div class="p-light s3-light">
+          <div>
+            <div class="p-section-label">About</div>
+            <div class="p-section-heading">Kim Williams</div>
+            <div class="p-rule s3-rule"></div>
+            <div class="p-body">Atlanta-based pianist with three decades of experience across jazz, pop, rock, and classical. Available for weddings, corporate events, and private occasions.</div>
+          </div>
+          <div>
+            <div class="p-section-label">Musical Styles</div>
+            <div class="p-genre-row">
+              <div class="p-genre s3-genre">Jazz</div>
+              <div class="p-genre s3-genre">Pop</div>
+              <div class="p-genre s3-genre">Rock</div>
+              <div class="p-genre s3-genre">Classical</div>
+            </div>
+          </div>
+          <div>
+            <div class="p-section-label">Performances</div>
+            <div class="p-perf-row s3-perf-border">
+              <span class="p-perf-date">Jul 12</span>
+              <span class="p-perf-venue">The Painted Pin</span>
+              <span class="p-perf-tag s3-perf-tag">Jazz Night</span>
+            </div>
+            <div class="p-perf-row s3-perf-border">
+              <span class="p-perf-date">Aug 2</span>
+              <span class="p-perf-venue">Atlanta Botanical Garden</span>
+              <span class="p-perf-tag s3-perf-tag">Corporate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#182a1c;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark / Nav</span>
+            <span class="swatch-hex">#182a1c</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#243d28;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark Sections</span>
+            <span class="swatch-hex">#243d28</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#f4eedc;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Light BG</span>
+            <span class="swatch-hex">#f4eedc</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#c4a84a;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Accent / Brass</span>
+            <span class="swatch-hex">#c4a84a</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#e8e2cc;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Alt Light</span>
+            <span class="swatch-hex">#e8e2cc</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ SCHEME 4 ═══════════════════ -->
+    <div class="scheme">
+      <div class="scheme-label">
+        <span class="scheme-num">04</span>
+        <span class="scheme-name">Slate &amp; Amber</span>
+        <span class="scheme-tagline">Modern hotel lounge · Contemporary sophistication</span>
+      </div>
+      <div class="preview">
+        <div class="p-dark s4-dark">
+          <div>
+            <div class="p-nav">
+              <span class="p-nav-logo s4-accent">Kim Williams Piano</span>
+              <div class="p-nav-links">
+                <span class="p-nav-link">Bio</span>
+                <span class="p-nav-link">Performances</span>
+                <span class="p-nav-link">Contact</span>
+              </div>
+            </div>
+            <div class="p-hero-tag s4-accent">Jazz · Pop · Rock · Classical · Atlanta GA</div>
+            <div class="p-hero-name">KIM<br>WILLIAMS</div>
+            <div class="p-hero-sub">Piano</div>
+            <span class="p-btn s4-btn-fill">Book an Event</span>
+            <span class="p-btn s4-btn-out">Watch &amp; Listen</span>
+          </div>
+          <div class="p-quote s4-quote-border">
+            "Music is the shorthand of emotion." — Tolstoy
+          </div>
+        </div>
+        <div class="p-light s4-light">
+          <div>
+            <div class="p-section-label">About</div>
+            <div class="p-section-heading">Kim Williams</div>
+            <div class="p-rule s4-rule"></div>
+            <div class="p-body">Atlanta-based pianist with three decades of experience across jazz, pop, rock, and classical. Available for weddings, corporate events, and private occasions.</div>
+          </div>
+          <div>
+            <div class="p-section-label">Musical Styles</div>
+            <div class="p-genre-row">
+              <div class="p-genre s4-genre">Jazz</div>
+              <div class="p-genre s4-genre">Pop</div>
+              <div class="p-genre s4-genre">Rock</div>
+              <div class="p-genre s4-genre">Classical</div>
+            </div>
+          </div>
+          <div>
+            <div class="p-section-label">Performances</div>
+            <div class="p-perf-row s4-perf-border">
+              <span class="p-perf-date">Jul 12</span>
+              <span class="p-perf-venue">The Painted Pin</span>
+              <span class="p-perf-tag s4-perf-tag">Jazz Night</span>
+            </div>
+            <div class="p-perf-row s4-perf-border">
+              <span class="p-perf-date">Aug 2</span>
+              <span class="p-perf-venue">Atlanta Botanical Garden</span>
+              <span class="p-perf-tag s4-perf-tag">Corporate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#1e2535;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark / Nav</span>
+            <span class="swatch-hex">#1e2535</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#2c3548;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark Sections</span>
+            <span class="swatch-hex">#2c3548</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#f0eee8;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Light BG</span>
+            <span class="swatch-hex">#f0eee8</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#d4883a;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Accent / Amber</span>
+            <span class="swatch-hex">#d4883a</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#e6e2da;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Alt Light</span>
+            <span class="swatch-hex">#e6e2da</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ SCHEME 5 ═══════════════════ -->
+    <div class="scheme">
+      <div class="scheme-label">
+        <span class="scheme-num">05</span>
+        <span class="scheme-name">Deep Burgundy &amp; Parchment</span>
+        <span class="scheme-tagline">Jazz posters · Velvet curtains · Old world elegance</span>
+      </div>
+      <div class="preview">
+        <div class="p-dark s5-dark">
+          <div>
+            <div class="p-nav">
+              <span class="p-nav-logo s5-accent">Kim Williams Piano</span>
+              <div class="p-nav-links">
+                <span class="p-nav-link">Bio</span>
+                <span class="p-nav-link">Performances</span>
+                <span class="p-nav-link">Contact</span>
+              </div>
+            </div>
+            <div class="p-hero-tag s5-accent">Jazz · Pop · Rock · Classical · Atlanta GA</div>
+            <div class="p-hero-name">KIM<br>WILLIAMS</div>
+            <div class="p-hero-sub">Piano</div>
+            <span class="p-btn s5-btn-fill">Book an Event</span>
+            <span class="p-btn s5-btn-out">Watch &amp; Listen</span>
+          </div>
+          <div class="p-quote s5-quote-border">
+            "Music is the shorthand of emotion." — Tolstoy
+          </div>
+        </div>
+        <div class="p-light s5-light">
+          <div>
+            <div class="p-section-label">About</div>
+            <div class="p-section-heading">Kim Williams</div>
+            <div class="p-rule s5-rule"></div>
+            <div class="p-body">Atlanta-based pianist with three decades of experience across jazz, pop, rock, and classical. Available for weddings, corporate events, and private occasions.</div>
+          </div>
+          <div>
+            <div class="p-section-label">Musical Styles</div>
+            <div class="p-genre-row">
+              <div class="p-genre s5-genre">Jazz</div>
+              <div class="p-genre s5-genre">Pop</div>
+              <div class="p-genre s5-genre">Rock</div>
+              <div class="p-genre s5-genre">Classical</div>
+            </div>
+          </div>
+          <div>
+            <div class="p-section-label">Performances</div>
+            <div class="p-perf-row s5-perf-border">
+              <span class="p-perf-date">Jul 12</span>
+              <span class="p-perf-venue">The Painted Pin</span>
+              <span class="p-perf-tag s5-perf-tag">Jazz Night</span>
+            </div>
+            <div class="p-perf-row s5-perf-border">
+              <span class="p-perf-date">Aug 2</span>
+              <span class="p-perf-venue">Atlanta Botanical Garden</span>
+              <span class="p-perf-tag s5-perf-tag">Corporate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#2d1017;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark / Nav</span>
+            <span class="swatch-hex">#2d1017</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#3e1820;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Dark Sections</span>
+            <span class="swatch-hex">#3e1820</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#f5ede0;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Light BG</span>
+            <span class="swatch-hex">#f5ede0</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#c9956a;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Accent / Rose Gold</span>
+            <span class="swatch-hex">#c9956a</span>
+          </div>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch-dot" style="background:#ede0ce;"></div>
+          <div class="swatch-info">
+            <span class="swatch-role">Alt Light</span>
+            <span class="swatch-hex">#ede0ce</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="text-align:center; margin-top:3rem; font-size:0.62rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:#aaa;">
+    Open index3.html and tell Kiro which scheme you prefer — it will apply it to the full site.
+  </p>
+
+</body>
+</html>

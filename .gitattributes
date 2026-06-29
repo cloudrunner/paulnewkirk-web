@@ -1,0 +1,4 @@
+*.mp4 -delta
+*.zip -delta
+*.png -delta
+*.jpg -delta
